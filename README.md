@@ -66,3 +66,34 @@ public static decimal CalculateTotalSalary(List<Employee> employees)
     }
     return totalSalary;
 }
+
+# Interface Segregation Principle (ISP)
+
+The Interface Segregation Principle (ISP) advocates dividing large interfaces into smaller ones. In C#, where multiple inheritance is not allowed but multiple interfaces can be implemented, ISP promotes the creation of interfaces that are focused on specific responsibilities.
+
+```csharp
+namespace InterfaceSegregation
+{
+    public class Developer : IWorkTeamActivities, IDevelopActivities
+    {
+        public Developer()
+        {
+        }
+
+        public void Plan() 
+        {
+            throw new ArgumentException();
+        }
+
+        public void Communicate() 
+        {
+            throw new ArgumentException();
+        }
+
+        public void Develop() 
+        {
+            Console.WriteLine("I'm developing the functionalities required");
+        }
+    }
+}
+```
