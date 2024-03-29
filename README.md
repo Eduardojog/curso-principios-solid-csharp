@@ -18,22 +18,51 @@ To adhere to SRP, the export functionality can be extracted into a separate `Exp
 
 # Open/Closed Principle (OCP)
 
-The code demonstrates the Open/Closed Principle by using inheritance.
+The Open/Closed Principle (OCP) in software design states that entities should be open for extension but closed for modification.
 
-- The `Employee` class is open for extension (i.e., new types of employees can be added by creating new subclasses), 
-  but closed for modification (i.e., existing code does not need to be modified to accommodate new types of employees).
+- **Open for Extension**: Allows adding new functionality without altering existing code.
   
-- When calling the `ShowSalaryMonthly` method, it accepts a list of `Employee` objects, which can include different types of employees,
-  such as `EmployeeFullTime` and `EmployeePartTime`. The method iterates over the list and calls the `CalculateSalaryMonthly` method,
-  which is polymorphically overridden by each subclass to calculate the monthly salary based on their specific logic.
+- **Closed for Modification**: Existing code remains stable and unchanged.
 
-This approach avoids adding conditional logic for each employee type (e.g., using multiple `if` or `else if` statements), 
-which would violate the Single Responsibility Principle (SRP) and lead to code that is not prepared for extension.
+In the provided code example:
+- `Employee` class serves as a base, open for extension.
+- `ShowSalaryMonthly` method accepts different employee types without modification.
+- New employee types can be added without altering existing code.
+
+This approach promotes code that is flexible, maintainable, and easily extensible
 
 
-# Abstract Classes in C#
+** Abstract Classes in C# **
 
 An abstract class is a class that cannot be instantiated directly, meaning you cannot create objects of it. Instead, it is designed to be used as a base class for other classes. 
 
 In the provided code, the `Employee` class is declared as abstract:
 
+
+
+# Liskov Substitution Principle (LSP)
+
+The Liskov Substitution Principle (LSP) states that objects of a superclass should be replaceable with objects of its subclasses without affecting the behavior of the program.
+
+## Example
+
+In the provided example, we have two subclasses of the `Employee` class: `EmployeeFullTime` and `EmployeeContractor`. Each subclass overrides the `CalculateSalary` method to provide its own implementation.
+
+- `EmployeeFullTime`: Calculates the salary based on hours worked plus extra hours.
+- `EmployeeContractor`: Calculates the salary based solely on hours worked.
+
+By adhering to the LSP, objects of any subclass (`EmployeeFullTime` or `EmployeeContractor`) can be substituted for objects of the superclass (`Employee`) without affecting the program's logic. Each subclass provides its own salary calculation method, ensuring that the behavior remains consistent across different types of employees.
+
+
+You can perform salary calculations using any subclass, and the method below demonstrates this flexibility:
+
+
+public static decimal CalculateTotalSalary(List<Employee> employees)
+{
+    decimal totalSalary = 0;
+    foreach (var employee in employees)
+    {
+        totalSalary += employee.CalculateSalary();
+    }
+    return totalSalary;
+}
