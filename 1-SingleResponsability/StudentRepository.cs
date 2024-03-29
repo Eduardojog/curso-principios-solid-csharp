@@ -23,5 +23,7 @@ namespace SingleResponsability
         {
             return storage.GetAll();
         }
+
+      
     }
 }

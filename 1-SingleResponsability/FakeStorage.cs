@@ -27,5 +27,7 @@ namespace SingleResponsability
         {
             return collection;
         }
+
+    
     }
 }
