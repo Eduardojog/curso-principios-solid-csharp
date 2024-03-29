@@ -97,3 +97,25 @@ namespace InterfaceSegregation
     }
 }
 ```
+
+# Dependency Inversion Principle (DIP)
+
+The Dependency Inversion Principle (DIP) aims to decouple components within an application, minimizing the impact of changes on existing code. It advocates using abstract types instead of concrete types, enabling easier modification and extension of the system.
+
+Dependency injection is a fundamental technique used to apply the Dependency Inversion Principle. Different types of dependency injection can be employed:
+
+- **Constructor Injection**: Dependencies are injected through the constructor of a class.
+- **Property Injection**: Dependencies are injected through properties of a class.
+- **Parameter Injection**: Dependencies are passed as parameters to the methods of a class.
+
+It's essential to use abstract types when applying dependency injection to maintain decoupling between components.
+
+Dependency injection supports various lifetimes for injected dependencies:
+
+- **Transient**: A new instance is created each time the service is requested.
+- **Scoped**: A single instance is created per HTTP request, reused throughout the request.
+- **Singleton**: A single instance is created for the application's duration, reused for all requests and users.
+
+Dependency injection is used to connect classes flexibly and decoupledly. For example, by injecting `ILogbook` into `StudentRepository`, it allows `StudentRepository` to log its activities without needing to know the implementation details of the logging class (`Logbook`). This improves modularity and testability, as each class can be tested and modified independently.
+
+Additionally, the provided code uses the Moq library for unit testing. Moq enables simulating the behavior of dependencies to test the class under different conditions. In the given example, Moq is used to simulate the behavior of the student repository (`IStudentRepository`) and the logger (`ILogbook`) in the unit tests of the student controller (`StudentController`). This enables isolated and reliable testing of the controller without relying on real implementations of dependencies.
